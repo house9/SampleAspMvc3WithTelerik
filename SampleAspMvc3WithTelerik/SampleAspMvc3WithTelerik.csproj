@@ -201,8 +201,9 @@
     <Content Include="Scripts\2010.3.1110\telerik.treeview.min.js" />
     <Content Include="Scripts\2010.3.1110\telerik.window.min.js" />
     <Content Include="Scripts\lib\jquery.tmpl.js" />
+    <Content Include="Scripts\src\FunWithNumericTextBox\sample_three.js" />
+    <Content Include="Scripts\src\FunWithNumericTextBox\sample_two.js" />
     <Content Include="Scripts\src\util.js" />
-    <Content Include="Scripts\src\FunWithNumericTextBox.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -232,6 +233,11 @@
     <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Views\FunWithNumericTextBox\SampleFour.cshtml" />
+    <None Include="Views\FunWithNumericTextBox\SampleThree.cshtml" />
+    <None Include="Views\FunWithNumericTextBox\SampleTwo.cshtml" />
+    <None Include="Views\FunWithNumericTextBox\SampleOne.cshtml" />
+    <None Include="Views\FunWithNumericTextBox\FooterPartial.cshtml" />
     <None Include="Views\FunWithNumericTextBox\Index.cshtml" />
     <None Include="Views\FunWithNumericTextBox\NumericTextBoxPartial.cshtml" />
   </ItemGroup>

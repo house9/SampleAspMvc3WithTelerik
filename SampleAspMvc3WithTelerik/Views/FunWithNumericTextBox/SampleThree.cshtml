@@ -1,0 +1,111 @@
+﻿@model dynamic
+@using Telerik.Web.Mvc.UI;
+@using System.Collections;
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Index</title>
+    @Html.Telerik(
+      ).StyleSheetRegistrar(
+      ).DefaultGroup(group => 
+        group.Add("Site.css").Add("telerik.common.css").Add("telerik.web20.css")
+      )
+</head>
+<body>
+    <div id="container">
+		<div id="header">
+			Fun with Numeric TextBox
+		</div>
+
+		<div id="body">
+			<h3>
+				Sample Three
+			</h3>
+			<div id="sample-three-target">
+				<span>
+					Sample Three:
+				</span>
+				<!-- 
+					numerictextboxes get appended here via javascript 
+					one when the page loads and additional when clicking the Add New link
+				-->
+			</div>
+			<div>
+				<a href="javascript: void(0)" id="sample-three-add-new-link">Add New</a>
+			</div>
+			<div class="info">
+				<p>
+					Sample Three is the same as Sample Two but we pre-load the form with some test data 
+					that is setup in the controller action; this data is 'bound' to a javascript variable 'data'
+				</p>
+			</div>
+
+			<!-- jquery template 'script'; contains the raw html markup we want to use as a template -->
+			<script id="sample-three-numerictextbox-markup-template" type="text/html">
+				@Html.Partial("NumericTextBoxPartial", new { name = "SampleThree_${templateIndex}" })
+			</script>
+
+			<!-- hidden div numerictextbox; we use this to copy options from -->
+			<div style="display: none">
+				@Html.Partial("NumericTextBoxPartial", new { name = "SampleThree_Template" })
+			</div>
+
+		</div><!-- END -->
+
+		<div id="footer">
+			@Html.Partial("FooterPartial")	
+		</div>
+    </div>
+
+	<script>
+		var undef; // undefined javascript var
+	</script>
+
+    @Html.Telerik(
+      ).ScriptRegistrar(
+      ).Scripts(scripts =>
+        scripts.AddGroup("Group1", group =>
+          group.Add("~/Scripts/lib/jquery.tmpl.js"
+		  ).Add("~/Scripts/src/util.js"
+		  ).Add("~/Scripts/src/FunWithNumericTextBox/sample_three.js"
+		  )
+        )
+      ).Globalization(true)
+      
+	  <script>
+		// namespace this js
+		var funWithNumericTextBox = {};
+
+		// we are loading a javascript data struture from server side code
+		// TODO: do this via serialization instead ????
+		var data = {
+			count: @View.SampleThree.Data.Count
+		};
+		@foreach(DictionaryEntry item in View.SampleThree.Data) {
+			<text>
+				data['@item.Key'] = @item.Value;
+			</text>
+		}
+
+		// create an 'instance' of the sample three behaviours; see Scripts/src/FunWithNumericTextBox
+		funWithNumericTextBox.sampleThreeBehaviours = sampleThreeConstructor({
+			selectors: {
+				link: 'sample-three-add-new-link',
+				markUpTemplate: 'sample-three-numerictextbox-markup-template',
+				optionsTemplate: 'SampleThree_Template',
+				target: 'sample-three-target'
+			},
+			data: data,
+			dataPrefix: 'SampleThree_'
+		});
+
+		// onload page
+		$(document).ready(function () {
+			// init sample three
+			funWithNumericTextBox.sampleThreeBehaviours.initialize();
+		});
+	  </script>
+</body>
+</html>

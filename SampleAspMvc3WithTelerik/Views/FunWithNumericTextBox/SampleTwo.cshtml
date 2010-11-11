@@ -1,0 +1,104 @@
+﻿@model dynamic
+@using Telerik.Web.Mvc.UI;
+@using System.Collections;
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Index</title>
+    @Html.Telerik(
+      ).StyleSheetRegistrar(
+      ).DefaultGroup(group => 
+        group.Add("Site.css").Add("telerik.common.css").Add("telerik.web20.css")
+      )
+</head>
+<body>
+    <div id="container">
+		<div id="header">
+			Fun with Numeric TextBox
+		</div>
+
+		<div id="body">
+			<h3>
+				Sample Two
+			</h3>
+			<div id="sample-two-target">
+				<span>
+					Sample Two:
+				</span>
+				<!-- 
+					numerictextboxes get appended here via javascript 
+					one when the page loads and additional when clicking the Add New link
+				-->
+			</div>
+			<div>
+				<a href="javascript: void(0)" id="sample-two-add-new-link">Add New</a>
+			</div>
+			<div class="info">
+				<p>
+					Sample Two uses two NumericTextBoxes; one in a jquery template; another that is in a hidden div,
+					this is used as a 'template' to copy the options from. This allows us to set all of the options 
+					using the HtmlHelper Html.Telerik().NumericTextBox() server side, but then we can add additional 
+					NumericTextBoxes client side using javascript without making additional server calls.
+				</p>
+				<p>
+					NOTE: this required a small modification to telerik.textbox.js; see comment JH-HACK
+					in Scripts/2010.3.1110/telerik.textbox.js
+				</p>
+			</div>
+
+			<!-- jquery template 'script'; contains the raw html markup we want to use as a template -->
+			<script id="sample-two-numerictextbox-markup-template" type="text/html">
+				@Html.Partial("NumericTextBoxPartial", new { name = "SampleTwo_${templateIndex}" })
+			</script>
+
+			<!-- hidden div numerictextbox; we use this to copy options from -->
+			<div style="display: none">
+				@Html.Partial("NumericTextBoxPartial", new { name = "SampleTwo_Template" })
+			</div>
+
+		</div><!-- END -->
+
+		<div id="footer">
+			@Html.Partial("FooterPartial")	
+		</div>
+    </div>
+
+	<script>
+		var undef; // undefined javascript var
+	</script>
+
+    @Html.Telerik(
+      ).ScriptRegistrar(
+      ).Scripts(scripts =>
+        scripts.AddGroup("Group1", group =>
+          group.Add("~/Scripts/lib/jquery.tmpl.js"
+		  ).Add("~/Scripts/src/util.js"
+		  ).Add("~/Scripts/src/FunWithNumericTextBox/sample_two.js"
+		  )
+        )
+      ).Globalization(true)
+      
+	  <script>
+		// namespace this js
+		var funWithNumericTextBox = {};
+
+		// create an 'instance' of the sample two behaviours; see Scripts/src/FunWithNumericTextBox
+		funWithNumericTextBox.sampleTwoBehaviours = sampleTwoConstructor({
+			selectors: {
+				link: 'sample-two-add-new-link',
+				markUpTemplate: 'sample-two-numerictextbox-markup-template',
+				optionsTemplate: 'SampleTwo_Template',
+				target: 'sample-two-target'
+			}
+		});
+
+		// onload page
+		$(document).ready(function () {
+			// init sample two
+			funWithNumericTextBox.sampleTwoBehaviours.initialize();
+		});
+	  </script>
+</body>
+</html>

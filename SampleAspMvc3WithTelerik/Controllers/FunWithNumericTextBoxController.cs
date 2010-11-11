@@ -10,12 +10,23 @@ namespace SampleAspMvc3WithTelerik.Controllers
 {
     public class FunWithNumericTextBoxController : Controller
     {
-        //
-        // GET: /FunWithNumericTextBox/
-
         public ActionResult Index()
         {
-            // store some data of type double
+            return View();
+        }
+
+        public ActionResult SampleOne()
+        {
+            return View();
+        }
+
+        public ActionResult SampleTwo()
+        {
+            return View();
+        }
+
+        public ActionResult SampleThree()
+        {
             Hashtable data = new Hashtable();
             data["SampleThree_0"] = GetValueInEnUS(100);
             data["SampleThree_1"] = GetValueInEnUS(20.6);
@@ -23,6 +34,11 @@ namespace SampleAspMvc3WithTelerik.Controllers
             data["SampleThree_3"] = GetValueInEnUS(0.5);
 
             ViewModel.SampleThree = new SampleThree(data);
+            return View();
+        }
+
+        public ActionResult SampleFour()
+        {
             return View();
         }
 
