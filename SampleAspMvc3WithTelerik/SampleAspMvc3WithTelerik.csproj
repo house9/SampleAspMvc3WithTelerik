@@ -69,7 +69,6 @@
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Extensions\TelerikExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -240,7 +239,9 @@
     <None Include="Views\FunWithNumericTextBox\SampleThree.cshtml" />
     <None Include="Views\FunWithNumericTextBox\SampleTwo.cshtml" />
     <None Include="Views\FunWithNumericTextBox\SampleOne.cshtml" />
-    <None Include="Views\FunWithNumericTextBox\FooterPartial.cshtml" />
+    <None Include="Views\FunWithNumericTextBox\FooterPartial.cshtml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Views\FunWithNumericTextBox\Index.cshtml" />
     <None Include="Views\FunWithNumericTextBox\NumericTextBoxPartial.cshtml" />
   </ItemGroup>
