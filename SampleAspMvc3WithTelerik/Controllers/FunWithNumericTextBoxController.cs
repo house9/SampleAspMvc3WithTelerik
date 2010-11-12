@@ -39,6 +39,21 @@ namespace SampleAspMvc3WithTelerik.Controllers
 
         public ActionResult SampleFour()
         {
+            double[] data = new double[4];
+            data[0] = 100;
+            data[1] = 20.6;
+            data[2] = 24;
+            data[3] = 0.5;
+
+            ViewModel.SomeData = data;
+            return View();
+        }
+
+        public ActionResult NumericTextBoxAction(int index, double? value)
+        {
+            string baseName = "SampleFour_";
+            ViewModel.name = String.Format("{0}{1}", baseName, index);
+            ViewModel.value = (value == null) ? 0 : value;
             return View();
         }
 

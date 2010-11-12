@@ -3,6 +3,7 @@
 
 @{
 	string numericTextBoxName = Model.name;
+	double value = Model.value;
 }
 
 @Html.Telerik(
@@ -15,4 +16,4 @@
 	).MaxValue(24
 	).IncrementStep(0.25
 	).DecimalDigits(2
-	).Value(0)
+	).Value(value)

@@ -1,0 +1,9 @@
+﻿@model dynamic
+@using Telerik.Web.Mvc.UI;
+
+@{
+	string numericTextBoxName = View.name;
+	double value = View.value;
+}
+
+@Html.Partial("NumericTextBoxPartial", new { name = numericTextBoxName, value = value })

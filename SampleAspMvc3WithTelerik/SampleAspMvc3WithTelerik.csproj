@@ -69,6 +69,7 @@
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\TelerikExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -201,6 +202,7 @@
     <Content Include="Scripts\2010.3.1110\telerik.treeview.min.js" />
     <Content Include="Scripts\2010.3.1110\telerik.window.min.js" />
     <Content Include="Scripts\lib\jquery.tmpl.js" />
+    <Content Include="Scripts\src\FunWithNumericTextBox\sample_four.js" />
     <Content Include="Scripts\src\FunWithNumericTextBox\sample_three.js" />
     <Content Include="Scripts\src\FunWithNumericTextBox\sample_two.js" />
     <Content Include="Scripts\src\util.js" />
@@ -233,6 +235,7 @@
     <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Views\FunWithNumericTextBox\NumericTextBoxAction.cshtml" />
     <None Include="Views\FunWithNumericTextBox\SampleFour.cshtml" />
     <None Include="Views\FunWithNumericTextBox\SampleThree.cshtml" />
     <None Include="Views\FunWithNumericTextBox\SampleTwo.cshtml" />

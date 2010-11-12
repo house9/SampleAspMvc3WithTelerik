@@ -50,12 +50,12 @@
 
 			<!-- jquery template 'script'; contains the raw html markup we want to use as a template -->
 			<script id="sample-two-numerictextbox-markup-template" type="text/html">
-				@Html.Partial("NumericTextBoxPartial", new { name = "SampleTwo_${templateIndex}" })
+				@Html.Partial("NumericTextBoxPartial", new { name = "SampleTwo_${templateIndex}", value = 0 })
 			</script>
 
 			<!-- hidden div numerictextbox; we use this to copy options from -->
 			<div style="display: none">
-				@Html.Partial("NumericTextBoxPartial", new { name = "SampleTwo_Template" })
+				@Html.Partial("NumericTextBoxPartial", new { name = "SampleTwo_Template", value = 0 })
 			</div>
 
 		</div><!-- END -->

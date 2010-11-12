@@ -23,17 +23,28 @@
 			<h3>
 				Sample Four
 			</h3>
-			<div>
+			<div id="sample-four-target">
 				<span>
 					Sample Four:
 				</span>
-				<span>
-					@Html.Partial("NumericTextBoxPartial", new { name = "SampleOne" })
-				</span>
+				@for(int i = 0; i < View.SomeData.Length; i++) {
+					<span>
+						@{ Html.RenderAction("NumericTextBoxAction", new { index = i, value = View.SomeData[i] }); }
+					</span>
+				}
+			</div>
+			<div>
+				<a href="javascript: void(0)" id="sample-four-add-new-link">Add New</a>
 			</div>
 			<div class="info">
 				<p>
-					Sample Four - TODO
+					Sample Four makes a server request via ajax each time the 'Add New' link is clicked.
+					A bit slower than sample3 and 4 but does not require any hacks to telerik code. The RenderAction
+					method is used to execute the partial on the server during the initial rendering and then 
+					everytime the link is clicked we execute the partial on the server but update the html without refreshing the page
+				</p>
+				<p>
+					NOTE: our first data item has a value beyond the numerictextbox max, so it defaults to blank
 				</p>
 			</div>
 
@@ -54,9 +65,30 @@
         scripts.AddGroup("Group1", group =>
           group.Add("~/Scripts/lib/jquery.tmpl.js"
 		  ).Add("~/Scripts/src/util.js"
+		  ).Add("~/Scripts/src/FunWithNumericTextBox/sample_four.js"
 		  )
         )
       ).Globalization(true)
 
+	  <script>
+		// namespace this js
+		var funWithNumericTextBox = {};
+
+		// create an 'instance' of the sample four behaviours; see Scripts/src/FunWithNumericTextBox
+		funWithNumericTextBox.sampleFourBehaviours = sampleFourConstructor({
+			selectors: {
+				link: 'sample-four-add-new-link',
+				target: 'sample-four-target'
+			},
+			url: '@Url.Content("~/funwithnumerictextbox/numerictextboxaction")',
+			startingIndex: @View.SomeData.Length
+		}); 
+
+		// onload page
+		$(document).ready(function () {
+			// init sample four
+			funWithNumericTextBox.sampleFourBehaviours.initialize();
+		});
+	  </script>
 </body>
 </html>
